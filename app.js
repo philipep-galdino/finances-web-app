@@ -8,12 +8,17 @@ const form = document.querySelector('#form')
 const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
-const dummyTransactions = [
+let dummyTransactions = [
     { id: 1, name: 'Chocolate cake', amount: -20 },
-    { id: 1, name: 'Salary', amount: 300 },
-    { id: 1, name: 'Chicken pie', amount: -10 },
-    { id: 1, name: 'Guitar', amount: 150 }
+    { id: 2, name: 'Salary', amount: 300 },
+    { id: 3, name: 'Chicken pie', amount: -10 },
+    { id: 4, name: 'Guitar', amount: 150 }
 ]
+
+const removeTransaction = ID => {
+    dummyTransactions = dummyTransactions.filter(transaction => transaction.id !== ID)
+    init()
+}
 
 const addTransactionsIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+'
@@ -23,7 +28,11 @@ const addTransactionsIntoDOM = transaction => {
 
     li.classList.add(CSSClass)
     li.innerHTML = `
-        ${transaction.name} <span>${operator} $${amountWithNoOperator}</span><button class="delete-btn">x</button>
+        ${transaction.name} 
+        <span>${operator} $${amountWithNoOperator}</span>
+        <button class="delete-btn" onClick="removeTransaction(${transaction.id})">
+            x
+        </button>
     `
 
     transactionsUl.append(li)
