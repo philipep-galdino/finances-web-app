@@ -4,6 +4,10 @@ const incomeDisplay = document.querySelector('#money-plus')
 const outgoingDisplay = document.querySelector('#money-minus')
 const balanceDisplay = document.querySelector('#balance')
 
+const form = document.querySelector('#form')
+const inputTransactionName = document.querySelector('#text')
+const inputTransactionAmount = document.querySelector('#amount')
+
 const dummyTransactions = [
     { id: 1, name: 'Chocolate cake', amount: -20 },
     { id: 1, name: 'Salary', amount: 300 },
@@ -49,8 +53,36 @@ const updateBalanceValues = () => {
 }
 
 const init = () => {
+    transactionsUl.innerHTML = ''
     dummyTransactions.forEach(addTransactionsIntoDOM)
     updateBalanceValues()
 } 
 
 init()
+
+const generateID = () => Math.round(Math.random() * 1000)
+
+form.addEventListener('submit', event => {
+    event.preventDefault()
+
+    const transactionName = inputTransactionName.value.trim()
+    const transactionAmount = inputTransactionAmount.value.trim()
+
+    if (transactionName === '' || transactionAmount === '') {
+        alert('Please, type in the transactions name and value as well')
+
+        return
+    }
+
+    const transaction = { 
+        id: generateID(), 
+        name: transactionName, 
+        amount: Number(transactionAmount) 
+    }
+
+    dummyTransactions.push(transaction)
+    init()
+
+    inputTransactionAmount.value = ''
+    inputTransactionName.value = ''
+})
