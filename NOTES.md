@@ -28,3 +28,7 @@ const numbersGreaterThan37 = randomNumbers.filter((item) => item > 37)
 numbeersGreaterThan37
 // the output would be '[99, 63]'
 ```
+
+<hr></hr>
+
+The `LocalStorage`. <b>What is it?</b> There's an API on the browser called Web Storage API. This API allows us to store and persist data on the user's browser, so when the user access the app again, their data will be saved.
